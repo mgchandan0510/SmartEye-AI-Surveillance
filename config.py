@@ -27,8 +27,8 @@ ANIMAL_NAMES = {"dog", "cat", "horse", "sheep", "cow", "bear", "zebra"}
 VEHICLE_NAMES = {"car", "truck", "bus", "bicycle", "motorcycle"}    
 
 # --- NEW: Telegram Settings ---
-TELEGRAM_TOKEN = "8415766070:AAGFqD9TGKUncvywk8dO7QUFMrWRY5NCAjY"
-TELEGRAM_CHAT_ID = "5728026795"
+TELEGRAM_TOKEN = "your token"
+TELEGRAM_CHAT_ID = "your chatid"
 
 # --- PERFORMANCE OPTIMIZATIONS ---
 USE_MOTION_DETECTION = False    # Disabled for instant detection
