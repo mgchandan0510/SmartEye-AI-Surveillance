@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Cam Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { font-family: sans-serif; background: #1a1a1a; color: #ddd; margin: 0; padding: 10px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 { text-align: center; color: #00d4ff; }
+        
+        .live-view { width: 100%; border: 2px solid #444; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
+        
+        /* LOG WINDOW STYLES */
+        .log-box { 
+            background: #000; 
+            border: 1px solid #333; 
+            padding: 10px; 
+            height: 150px; 
+            overflow-y: scroll; 
+            font-family: monospace; 
+            font-size: 12px; 
+            color: #0f0;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        .log-entry { margin: 2px 0; border-bottom: 1px solid #222; }
+
+        .captures-box { background: #333; padding: 15px; border-radius: 8px; margin-top: 20px; }
+        li { padding: 5px 0; border-bottom: 1px solid #444; list-style: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Smart Cam Live</h1>
+        
+        <!-- Camera Feed -->
+        <img src="{{ url_for('video_feed') }}" class="live-view">
+        
+        <!-- Live Logs -->
+        <h3>System Logs</h3>
+        <div class="log-box" id="log-window">
+            Loading logs...
+        </div>
+
+        <!-- Captures -->
+        <div class="captures-box">
+            <h3>Recent Alerts</h3>
+            <a href="/" style="color: #fff;">Refresh List</a>
+            <ul>
+                {% for folder in captures %}
+                    <li>📂 {{ folder }}</li>
+                {% else %}
+                    <li>No alerts yet...</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function fetchLogs() {
+            fetch('/api/logs')
+                .then(response => response.json())
+                .then(data => {
+                    const logBox = document.getElementById('log-window');
+                    logBox.innerHTML = ''; // Clear old logs
+                    data.forEach(log => {
+                        const div = document.createElement('div');
+                        div.className = 'log-entry';
+                        div.innerText = log;
+                        logBox.appendChild(div);
+                    });
+                });
+        }
+        // Fetch logs every 2 seconds
+        setInterval(fetchLogs, 2000);
+        fetchLogs();
+    </script>
+</body>
+</html>
+</html>
