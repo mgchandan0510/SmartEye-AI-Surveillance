@@ -113,6 +113,6 @@ A real-time demonstration showing:
 Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/smarteye-ai-surveillance.git
+git clone https://github.com/mgchandan0510/smarteye-ai-surveillance.git
 cd smarteye-ai-surveillance
 
